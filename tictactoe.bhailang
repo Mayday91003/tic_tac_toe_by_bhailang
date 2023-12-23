@@ -1,0 +1,88 @@
+hi bhai
+  bol bhai "Welcome to Tic-Tac-Toe!";
+
+  bhai ye hai board = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "]
+  ];
+
+  bhai ye hai current_player = "X";
+  bhai ye hai game_over = false;
+
+  while bhai (not game_over) {
+    bhai ye hai row = get_input("Enter row (0, 1, or 2): ");
+    bhai ye hai col = get_input("Enter column (0, 1, or 2): ");
+
+    agar bhai (is_valid_move(board, row, col)) {
+      place_move(board, row, col, current_player);
+      print_board(board);
+
+      agar bhai (check_winner(board, current_player)) {
+        bol bhai current_player + " wins!";
+        bhai ye hai game_over = true;
+      } nahi to bhai (is_board_full(board)) {
+        bol bhai "It's a draw!";
+        bhai ye hai game_over = true;
+      } nahi to {
+        toggle_player(current_player);
+      }
+    } nahi to {
+      bol bhai "Invalid move. Try again.";
+    }
+  }
+
+bye bhai
+
+bhai ye hai function get_input(prompt) {
+  bol bhai prompt;
+  vapas bol bhai parseInt(input());
+}
+
+bhai ye hai function is_valid_move(board, row, col) {
+  vapas bol bhai board[row][col] == " ";
+}
+
+bhai ye hai function place_move(board, row, col, player) {
+  bhai ye hai board[row][col] = player;
+}
+
+bhai ye hai function print_board(board) {
+  bol bhai "Current Board:";
+  ke liye bhai row in board {
+    bol bhai row;
+  }
+}
+
+bhai ye hai function toggle_player(player) {
+  bhai ye hai player = bhai (player == "X") ? "O" : "X";
+}
+
+bhai ye hai function check_winner(board, player) {
+  ke liye bhai i in range(3) {
+    agar bhai (board[i][0] == player and board[i][1] == player and board[i][2] == player) {
+      vapas bol bhai true;
+    }
+    agar bhai (board[0][i] == player and board[1][i] == player and board[2][i] == player) {
+      vapas bol bhai true;
+    }
+  }
+  agar bhai (board[0][0] == player and board[1][1] == player and board[2][2] == player) {
+    vapas bol bhai true;
+  }
+  agar bhai (board[0][2] == player and board[1][1] == player and board[2][0] == player) {
+    vapas bol bhai true;
+  }
+  vapas bol bhai false;
+}
+
+bhai ye hai function is_board_full(board) {
+  ke liye bhai row in board {
+    ke liye bhai cell in row {
+      agar bhai cell == " " {
+        vapas bol bhai false;
+      }
+    }
+  }
+  vapas bol bhai true;
+}
